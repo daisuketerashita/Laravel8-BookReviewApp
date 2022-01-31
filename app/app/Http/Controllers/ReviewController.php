@@ -23,11 +23,22 @@ class ReviewController extends Controller
     {
         $post = $request->all();
 
-        Review::insert([
-            'user_id' => \Auth::id(),
-            'title' => $post['title'],
-            'body' => $post['body'],
-        ]);
+        if($request->hasFile('image'))
+        {
+            $request->file('image')->store('/public/images');
+            Review::insert([
+                'user_id' => \Auth::id(),
+                'title' => $post['title'],
+                'body' => $post['body'],
+                'image' => $request->file('image')->hashName(),
+            ]);
+        }else{
+            Review::insert([
+                'user_id' => \Auth::id(),
+                'title' => $post['title'],
+                'body' => $post['body'],
+            ]);
+        }
 
         return redirect()->route('index');
     }
