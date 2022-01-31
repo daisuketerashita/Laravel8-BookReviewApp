@@ -20,4 +20,5 @@ Route::get('/', [ReviewController::class, 'index'])->name('index');
 Route::group(['middleware' => 'auth'],function(){
     //新規作成
     Route::get('/review/',[ReviewController::class,'create'])->name('create');
+    Route::post('/review/store/',[ReviewController::class,'store'])->name('store');
 });
