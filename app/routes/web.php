@@ -16,3 +16,6 @@ use App\Http\Controllers\ReviewController;
 Auth::routes();
 
 Route::get('/', [ReviewController::class, 'index'])->name('index');
+
+//新規作成
+Route::get('/review/',[ReviewController::class,'create'])->name('create');
